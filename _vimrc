@@ -4,10 +4,10 @@ nmap K <C-U>
 
 syntax enable
 set background=dark
-colorscheme desert
-set guifont=Consolas:h11:cANSI
+colorscheme slate
+set guifont=Consolas:h12:cANSI
 
-set ci
+set smartindent
 set noet
 set sw=4
 set ts=4
@@ -30,6 +30,7 @@ call vundle#rc(path)
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'hynek/vim-python-pep8-indent'
 
 
 " The following are examples of different formats supported.
