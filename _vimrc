@@ -13,6 +13,8 @@ set sw=4
 set ts=4
 filetype indent on
 
+set hlsearch
+set number
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
