@@ -4,8 +4,11 @@ nmap K <C-U>
 
 syntax enable
 set background=dark
-colorscheme slate
-set guifont=Consolas:h12:cANSI
+colorscheme Tomorrow-Night-Eighties
+
+if has("win32")
+	set guifont=Consolas:h12:cANSI
+endif
 
 set smartindent
 set noet
@@ -15,17 +18,36 @@ filetype indent on
 
 set hlsearch
 set number
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"花括号自动匹配
+imap [[ {<esc>o}<esc>:let leavechar="}"<cr>O
+
+
+"取消swapfile
+set noswapfile
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"            				Vundle		                          "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
+if has("win32") 
 " Windows path and cancle vundle#end
-set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-let path='$HOME/vimfiles/bundle'
-call vundle#rc(path)
+	set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+	let path='$HOME/vimfiles/bundle'
+	call vundle#rc(path)
+elseif has("unix")
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+endif
+
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -35,24 +57,8 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'hynek/vim-python-pep8-indent'
 
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
 " All of your Plugins must be added before the following line
-"call vundle#end()            " required
+call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -67,7 +73,9 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							neocomplete 							 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -79,11 +87,11 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" Define dictionary.
+" Define dictionary. You have to add lang.dict file by yourself and edit.
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
+	\ 'java' : $HOME.'/.vim/dict/java.dict',
         \ }
 
 " Define keyword.
@@ -151,4 +159,5 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
 
