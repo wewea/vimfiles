@@ -1,0 +1,11 @@
+#!/bin/bash
+
+UPLOAD_FILE="$HOME/.vim/dict"
+UPLOAD_FILE="$UPLOAD_FILE $HOME/.vim/colors"
+UPLOAD_FILE="$UPLOAD_FILE $HOME/.vimrc"
+UPLOAD_FILE="$UPLOAD_FILE $HOME/.zshrc"
+
+echo $UPLOAD_FILE
+
+cp -r $UPLOAD_FILE ./
+

@@ -717,6 +717,8 @@ StackOverflowError
 StackTraceElement
 StateFactory
 Statement
+StdIn
+StdOut
 StreamCorruptedException
 StreamTokenizer
 StrictMath
