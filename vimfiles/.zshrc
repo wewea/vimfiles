@@ -5,7 +5,7 @@ export ZSH=/home/zhlin/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
+ZSH_THEME="cloud"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -81,10 +81,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vi="vim"
-alias apgt="sudo apt-get"
-alias jac="javac-algs4 "
-alias jaa="java-algs4"
+alias vi='vim'
+alias app='sudo apt-get'
+alias jac='javac-algs4'
+alias jaa='java-algs4'
+alias opendir='nautilus'
+alias rzsh='source ~/.zshrc'
+
+############################################
+#				self-config				   #
+############################################
 
 # entry for visual-studio-code 
 function __code() {
@@ -101,4 +107,55 @@ alias code="__code"
 eval `dircolors ~/dircolors-solarized/dircolors.256dark`
 
 # set TERM
-export TERM=xterm-256color
+if [[ $TERM == xterm ]]; then
+ 	TERM=xterm-256color
+fi
+
+# set for rvm plugins
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# reload theme
+function __reload_theme {
+	if [[ "$1" =~ [0-9a-z]+ ]]; then
+		echo "change theme to $1"
+		ZSH_THEME="$1"
+	else
+		ZSH_THEME="random"	
+	fi
+	source $ZSH/oh-my-zsh.sh
+	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+}
+
+alias rt='__reload_theme'
+
+# output theme name
+function __out_put_theme_name {
+	if [ "$ZSH_THEME" = "random" ];then
+		echo "current theme is ${RANDOM_THEME##*/}"
+	else
+		echo "current theme is $ZSH_THEME"
+	fi
+}
+
+alias zsh-theme='__out_put_theme_name'
+
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+source $HOME/.nvm/nvm.sh # Add NVM 
+
+# for nvm bash_completion
+[[ -r "NVM_DIR"/bash_completion ]] && . $NVM_DIR/bash_completion
+
+
+# mkdir & cd dir
+function mkdir_and_chdir {
+	if [ -n "$1" ]; then
+		mkdir $1 && cd $1 
+	else
+		echo "invalid dir name!"
+	fi
+}
+
+alias mc='mkdir_and_chdir'

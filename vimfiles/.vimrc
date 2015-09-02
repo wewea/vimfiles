@@ -27,6 +27,7 @@ imap [[ {<esc>o}<esc>:let leavechar="}"<cr>O
 "取消swapfile
 set noswapfile
 
+"bind Ctrl-U & Ctrl-D
 
 
 
@@ -54,9 +55,13 @@ endif
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'hynek/vim-python-pep8-indent'
-
+Plugin 'davidhalter/jedi-vim'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'tpope/vim-commentary'
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -159,6 +164,41 @@ endif
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							neosnippet 							     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin key-mappings.
+ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+ xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+  endif
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							jedi-python 							 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:jedi#documentation_command = "M"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							commentary  							 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType javascript setlocal commentstring=//\ %s
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							vim-snippets  							 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
