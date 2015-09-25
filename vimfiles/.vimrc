@@ -3,9 +3,11 @@ nmap J <C-D>
 nmap K <C-U>
 
 syntax enable
-set background=dark
-colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow-Night-Eighties
+set background=light
 set t_Co=256
+let g:solarized_termcolors=256
+colorscheme solarized
 
 if has("win32")
 	set guifont=Consolas:h12:cANSI
@@ -98,6 +100,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
 	\ 'java' : $HOME.'/.vim/dict/java.dict',
+	\ 'javascript': '~/.vim/dict/javascript.dict,~/.vim/dict/node.dict',
         \ }
 
 " Define keyword.
@@ -166,6 +169,7 @@ endif
 " https://github.com/c9s/perlomni.vim
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "							neosnippet 							     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -187,6 +191,9 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
   endif
 
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "							jedi-python 							 "
@@ -198,7 +205,3 @@ let g:jedi#documentation_command = "M"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType javascript setlocal commentstring=//\ %s
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"							vim-snippets  							 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'

@@ -104,7 +104,8 @@ function __code() {
 alias code="__code"
 
 # set dir_colors
-eval `dircolors ~/dircolors-solarized/dircolors.256dark`
+eval `dircolors ~/dircolors-solarized/dircolors.ansi-light
+`
 
 # set TERM
 if [[ $TERM == xterm ]]; then
