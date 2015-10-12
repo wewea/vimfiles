@@ -4,10 +4,11 @@ nmap K <C-U>
 
 syntax enable
 " colorscheme Tomorrow-Night-Eighties
-set background=light
+set background=dark
 set t_Co=256
 let g:solarized_termcolors=256
-colorscheme solarized
+" colorscheme solarized
+colorscheme default
 
 if has("win32")
 	set guifont=Consolas:h12:cANSI
@@ -15,8 +16,8 @@ endif
 
 set smartindent
 set noet
-set sw=4
-set ts=4
+set sw=2
+set ts=2
 filetype indent on
 
 set hlsearch
@@ -64,6 +65,11 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'tpope/vim-commentary'
 Plugin 'honza/vim-snippets'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'godlygeek/tabular'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -205,3 +211,56 @@ let g:jedi#documentation_command = "M"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType javascript setlocal commentstring=//\ %s
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"							jshint2  							     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set runtimepath+=~/.vim/bundle/jshint2/
+let jshint2_read = 0
+let jshint2_save = 0
+let jshint2_close = 1
+let jshint2_confirm = 1
+let jshint2_color = 1
+let jshint2_error = 0
+let jshint2_min_height = 3
+let jshint2_max_height = 12
+
+" jshint validation
+nnoremap <silent><F4> :JSHint<CR>
+inoremap <silent><F4> <C-O>:JSHint<CR>
+vnoremap <silent><F4> :JSHint<CR>
+
+" show next jshint error
+nnoremap <silent><F2> :lnext<CR>
+inoremap <silent><F2> <C-O>:lnext<CR>
+vnoremap <silent><F2> :lnext<CR>
+
+" show previous jshint error
+nnoremap <silent><F3> :lprevious<CR>
+inoremap <silent><F3> <C-O>:lprevious<CR>
+vnoremap <silent><F3> :lprevious<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"															ctrlp-funky												     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set runtimepath^=~/.vim/bundle/ctrlp
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_funky_use_cache = 1
+let g:ctrlp_funky_sort_by_mru = 1
+let g:ctrlp_funky_nolim = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"															web-indent												     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:js_indent_log = 0
+let g:js_indent = "~/.vim/bundle/web-indent/indent/javascript.vim"

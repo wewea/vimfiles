@@ -92,20 +92,8 @@ alias rzsh='source ~/.zshrc'
 #				self-config				   #
 ############################################
 
-# entry for visual-studio-code 
-function __code() {
-	if [ "$@x" != 'x' ]; then
-		(~/tools/web/visual-studio-code/Code "$@" &) &> /dev/null
-	else
-		(~/tools/web/visual-studio-code/Code &) &> /dev/null
-	fi
-}
-
-alias code="__code"
-
 # set dir_colors
-eval `dircolors ~/dircolors-solarized/dircolors.ansi-light
-`
+eval `dircolors ~/dircolors-solarized/dircolors.ansi-light`
 
 # set TERM
 if [[ $TERM == xterm ]]; then
@@ -160,3 +148,11 @@ function mkdir_and_chdir {
 }
 
 alias mc='mkdir_and_chdir'
+
+# cnpm
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+	--cache=$HOME/.npm/.cache/cnpm \
+	--disturl=https://npm.taobao.org/dist \
+	--userconfig=$HOME/.cnpmrc"
+
+eval $(thefuck --alias)

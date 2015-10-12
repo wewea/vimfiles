@@ -6,11 +6,14 @@ else
 	echo "vimfiles dir exist!"
 fi
 
+SNIPPET="$HOME/.vim/bundle/vim-snippets/snippets"
 UPLOAD_FILE="$HOME/.vim/dict"
+UPLOAD_FILE="$HOME/.tmux.conf"
 UPLOAD_FILE="$UPLOAD_FILE $HOME/.vim/colors"
 UPLOAD_FILE="$UPLOAD_FILE $HOME/.vimrc"
 UPLOAD_FILE="$UPLOAD_FILE $HOME/.zshrc"
 UPLOAD_FILE="$UPLOAD_FILE $HOME/dircolors-solarized"
+UPLOAD_FILE="$UPLOAD_FILE $SNIPPET"
 
 echo $UPLOAD_FILE
 
