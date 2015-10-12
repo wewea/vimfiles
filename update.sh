@@ -1,32 +1,50 @@
 #!/bin/bash
 
+VIMFILES=vimfiles
 if [ ! -d "vimfiles" ];then
-	mkdir vimfiles
+	mkdir $VIMFILES
 else
 	echo "vimfiles dir exist!"
 fi
 
 SNIPPET="$HOME/.vim/bundle/vim-snippets/snippets"
-UPLOAD_FILE="$HOME/.vim/dict"
-UPLOAD_FILE="$HOME/.tmux.conf"
-UPLOAD_FILE="$UPLOAD_FILE $HOME/.vim/colors"
-UPLOAD_FILE="$UPLOAD_FILE $HOME/.vimrc"
-UPLOAD_FILE="$UPLOAD_FILE $HOME/.zshrc"
-UPLOAD_FILE="$UPLOAD_FILE $HOME/dircolors-solarized"
-UPLOAD_FILE="$UPLOAD_FILE $SNIPPET"
+DICT="$HOME/.vim/dict"
+TMUX="$HOME/.tmux.conf"
+COLORS="$HOME/.vim/colors"
+VIMRC="$HOME/.vimrc"
+ZSHRC="$HOME/.zshrc"
+DIRCOLOR="$HOME/dircolors-solarized"
+UPLOAD_FILE="$SNIPPET $DICT $TMUX $COLORS $VIMRC $ZSHRC $DIRCOLOR"
 
-echo $UPLOAD_FILE
+createDir (){
+	local path=$1
 
-if [ -d "vimfiles" ]; then
-	#cp -r $UPLOAD_FILE ./vimfiles
-	rsync -av --exclude="*/.git*" $UPLOAD_FILE ./vimfiles
-else
-	echo "lack of dir(vimfiles)"
-	exit 1
-fi
+	local parent_path=${path%/*}
+	if [ "$parent_path" != "$VIMFILES" ];then
+		createDir "$parent_path"
+	fi	
+	echo $path
 
-echo "----------------------------------------------------"
-echo "Update File:"
-git status|awk '/\w*\.[a-z]/{print $NF}'|tr "\n" " " |xargs echo
+	[ ! -d $path ] && mkdir $path
+	return 
+}
+# test createDir
+# createDir vimfiles/a/b/c
+
+for file in $UPLOAD_FILE
+do
+	if [ -d $file ]; then
+		dirPath="${file#${HOME}/}"
+		createDir "$VIMFILES/$dirPath"
+		rsync -av --exclude="*/.git*" "$file" "./vimfiles/$dirPath"
+	else
+		# copy common file
+		rsync -av --exclude="*/.git*" "$file" "./vimfiles/" 
+	fi
+done
+
+# echo "----------------------------------------------------"
+# echo "Update File:"
+# git status|awk '/\w*\.[a-z]/{print $NF}'|tr "\n" " " |xargs echo
 
 
