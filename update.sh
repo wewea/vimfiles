@@ -14,7 +14,9 @@ COLORS="$HOME/.vim/colors"
 VIMRC="$HOME/.vimrc"
 ZSHRC="$HOME/.zshrc"
 DIRCOLOR="$HOME/dircolors-solarized"
-UPLOAD_FILE="$SNIPPET $DICT $TMUX $COLORS $VIMRC $ZSHRC $DIRCOLOR"
+JS_INDENT_PLUGIN="$HOME/.vim/bundle/web-indent"
+UPLOAD_FILE="$SNIPPET $DICT $TMUX $COLORS $VIMRC $ZSHRC $DIRCOLOR \
+						 $JS_INDENT_PLUGIN"
 
 createDir (){
 	local path=$1

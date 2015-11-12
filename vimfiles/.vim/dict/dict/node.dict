@@ -404,3 +404,12 @@ writeUInt16LE
 writeUInt32BE
 writeUInt32LE
 writeUInt8
+express
+localhost
+cheerio
+superagent
+supertest
+mocha
+should
+cookie
+session

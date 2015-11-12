@@ -693,3 +693,9 @@ writeln
 XMLHttpRequest
 console
 debugger
+enumerable
+writable
+configurable
+defineProperty
+getOwnPropertyDescriptor
+getOwnPropertyNames

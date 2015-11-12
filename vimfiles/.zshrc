@@ -48,11 +48,11 @@ ZSH_THEME="cloud"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git autojump)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/zhlin/algs4/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/zhlin/Applications/node-v4.2.1-linux-x64/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,6 +82,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi='vim'
+alias js='vim'
 alias app='sudo apt-get'
 alias jac='javac-algs4'
 alias jaa='java-algs4'
@@ -132,7 +133,7 @@ alias zsh-theme='__out_put_theme_name'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-source $HOME/.nvm/nvm.sh # Add NVM 
+[ -f "$HOME/.nvm/nvm.sh" ] && source $HOME/.nvm/nvm.sh # Add NVM 
 
 # for nvm bash_completion
 [[ -r "NVM_DIR"/bash_completion ]] && . $NVM_DIR/bash_completion
@@ -149,10 +150,15 @@ function mkdir_and_chdir {
 
 alias mc='mkdir_and_chdir'
 
-# cnpm
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-	--cache=$HOME/.npm/.cache/cnpm \
-	--disturl=https://npm.taobao.org/dist \
-	--userconfig=$HOME/.cnpmrc"
-
 eval $(thefuck --alias)
+
+# add go path
+export PATH="$PATH:/usr/local/go/bin"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# add mongodb
+export PATH="/usr/local/mongodb/mongodb-linux-x86_64-ubuntu1404-3.0.7/bin:$PATH"
+
+alias mongod='mongod --dbpath /home/zhlin/Data/db'
